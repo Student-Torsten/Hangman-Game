@@ -1,0 +1,39 @@
+/*
+general settings
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 20px;
+  height: 100%;
+}
+
+/*
+indiviual styles
+*/
+#wordsection {
+  display: inline;
+}
+.inline {
+  display: inline;
+}
+.characterbox {
+  display: inline;
+  width: 20px;
+  border-bottom: 2px solid black;
+  display: inline;
+  margin: 10px;
+}
+.hidden {
+  opacity: 50%;
+}
