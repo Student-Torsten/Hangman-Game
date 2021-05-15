@@ -1,5 +1,5 @@
 // gloabl variables
-const searchWord = "Gartenkralle";
+const searchWord = "Donaudampfschifffahrtsrückversicherungsgesellschaft";
 let searchWordArray = [];
 let searchWordLength = 0;
 let inputChar = "";
