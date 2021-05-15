@@ -27,7 +27,14 @@ function restart() {
       main.removeChild(main.firstChild);
     }
   }
-  //initialize the new and reset the worn key counter
+  // delete the list of wrong keys from last game
+  let wrongAttempts = document.querySelector("#wrongAttempts");
+  if (wrongAttempts != null) {
+    while (wrongAttempts.firstChild) {
+      wrongAttempts.removeChild(wrongAttempts.firstChild);
+    }
+  }
+  //initialize the new and reset the wrong key counter
   splitWord();
   createFields();
   wrongKeys.length = 0;
@@ -63,6 +70,23 @@ function createFields() {
     characterField.append(characterplace);
   }
 }
+/**
+ * display the wrong attempts / keys
+ */
+function displayWrongKeys() {
+  let wrongAttempts = document.querySelector("#wrongAttempts");
+  if (wrongAttempts != null) {
+    while (wrongAttempts.firstChild) {
+      wrongAttempts.removeChild(wrongAttempts.firstChild);
+    }
+  }
+  for (let i = 0; i < wrongKeys.length; i++) {
+    let characterFromArray = wrongKeys[i];
+    let characterplace = document.createElement("p");
+    characterplace.innerText = characterFromArray + ", ";
+    wrongAttempts.append(characterplace);
+  }
+}
 
 /**
  * get the keyboard input
@@ -93,6 +117,7 @@ function checkInput() {
 
     if (counter === 0 && check === false) {
       wrongKeys.push(inputChar);
+      displayWrongKeys();
     }
   }
   countWrongAttempts();
@@ -101,8 +126,6 @@ function checkInput() {
  * update and display the left attempts
  */
 function countWrongAttempts() {
-  gameOver();
-
   leftAttempts = attempts - wrongKeys.length;
   let domAttempt = document.querySelector("#attempts");
   let counter = document.createElement("p");
@@ -113,6 +136,7 @@ function countWrongAttempts() {
     counterp.remove();
   }
   domAttempt.append(counter);
+  gameOver();
 }
 
 /**
