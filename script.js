@@ -11,16 +11,34 @@ let domList = document.querySelector("#wordsection");
 /**
  * initial setup
  */
-splitWord();
-createFields();
-countWrongAttempts();
+restart();
+
+/**
+ * restart button & function
+ */
+let restartButton = document.querySelector("#restart");
+restartButton.addEventListener("click", restart);
+
+function restart() {
+  //delete the list entrys from last game
+  let main = document.querySelector("#wordsection");
+  if (main != null) {
+    while (main.firstChild) {
+      main.removeChild(main.firstChild);
+    }
+  }
+  //initialize the new and reset the worn key counter
+  splitWord();
+  createFields();
+  wrongKeys.length = 0;
+  countWrongAttempts();
+}
 
 /**
  * split the seachword in the characters
  */
 function splitWord() {
   searchWordArray = searchWord;
-  //  searchWordArray = searchWord.split("");
   searchWordLength = searchWord.length;
 }
 
@@ -31,7 +49,6 @@ function createFields() {
   let main = document.querySelector("#wordsection");
 
   for (let i = 0; i < searchWord.length; i++) {
-    //let characterFromArray = searchWordArray[i];
     let characterFromArray = searchWord[i];
 
     let characterField = document.createElement("div");
@@ -46,11 +63,6 @@ function createFields() {
     characterField.append(characterplace);
   }
 }
-
-/**
- * attempt counter
- */
-function attemptCounter() {}
 
 /**
  * get the keyboard input
@@ -89,6 +101,8 @@ function checkInput() {
  * update and display the left attempts
  */
 function countWrongAttempts() {
+  gameOver();
+
   leftAttempts = attempts - wrongKeys.length;
   let domAttempt = document.querySelector("#attempts");
   let counter = document.createElement("p");
@@ -99,4 +113,13 @@ function countWrongAttempts() {
     counterp.remove();
   }
   domAttempt.append(counter);
+}
+
+/**
+ * game over
+ */
+function gameOver() {
+  if (leftAttempts === 0) {
+    alert("game over!");
+  }
 }
