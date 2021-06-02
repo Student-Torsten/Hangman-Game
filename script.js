@@ -1,4 +1,7 @@
 // gloabl variables
+// TODO: Try to avoid global variables
+// Option a) IIFE 
+// Option b) Encapluslate in a class or module 
 const searchWord = "Donaudampfschifffahrtsrückversicherungsgesellschaft";
 let searchWordArray = [];
 let searchWordLength = 0;
@@ -11,15 +14,18 @@ let domList = document.querySelector("#wordsection");
 /**
  * initial setup
  */
-restart();
+restart(); // TODO: Create a init function that calls restart to show that is a lifecylce
 
 /**
  * restart button & function
  */
+// TODO: Get rid of global variables
+// Option: Wrap in a function and call inside the init function
 let restartButton = document.querySelector("#restart");
 restartButton.addEventListener("click", restart);
 
 function restart() {
+  // Todo: Refactor to own function
   //delete the list entrys from last game
   let main = document.querySelector("#wordsection");
   if (main != null) {
@@ -27,6 +33,7 @@ function restart() {
       main.removeChild(main.firstChild);
     }
   }
+  // Todo: Refactor to own function
   // delete the list of wrong keys from last game
   let wrongAttempts = document.querySelector("#wrongAttempts");
   if (wrongAttempts != null) {
@@ -91,6 +98,8 @@ function displayWrongKeys() {
 /**
  * get the keyboard input
  */
+// TODO: Get rid of global variables
+// Option: Wrap in a function and call inside the init function
 document.body.addEventListener("keyup", (event) => {
   inputChar = event.key;
   checkInput();
@@ -126,6 +135,7 @@ function checkInput() {
  * update and display the left attempts
  */
 function countWrongAttempts() {
+  // todo: Move variable declarations to top (the let things :P)
   leftAttempts = attempts - wrongKeys.length;
   let domAttempt = document.querySelector("#attempts");
   let counter = document.createElement("p");
@@ -142,6 +152,7 @@ function countWrongAttempts() {
 /**
  * game over
  */
+// Todo: Rename to "checkGameOver" to make more clear what the function is doing
 function gameOver() {
   if (leftAttempts === 0) {
     alert("game over!");
